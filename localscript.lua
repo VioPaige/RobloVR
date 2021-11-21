@@ -60,10 +60,6 @@ function initCFrames()
 			}
 			local camtrackingon = false
 			for _, v in pairs(cfTypes) do
-				--coroutine.wrap(function()
-				--	initCamera()
-				--end)()
-				--serverPrint("initcamera done")
 				serverPrint("type: " .. v.Name)
 				coroutine.wrap(function()
 					local loop = 0
@@ -72,12 +68,10 @@ function initCFrames()
 
 						local length = #CFrames2[v.Name]
 						local usercframe = vService:GetUserCFrame(v)
-						--serverPrint("defined stuff")
 						usercframe = usercframe * CFrame.new(0, 5.5, 0)
 
 						CFrames2[v.Name][length] = usercframe
 
-						--serverPrint("Found character object item")
 
 						if length >= 60 then
 							CFrames2[v.Name][1] = nil
@@ -92,7 +86,6 @@ function initCFrames()
 								workspace.CurrentCamera.CameraType = Enum.CameraType.Scriptable
 								plr.CameraMaxZoomDistance = .5
 								plr.CameraMinZoomDistance = .5
-								--serverPrint(workspace.CurrentCamera.CameraSubject.Name)
 								camtrackingon = true
 								while wait(1/90) do
 									workspace.CurrentCamera.CFrame = head.CFrame
@@ -100,7 +93,6 @@ function initCFrames()
 							end)()
 						end
 						if loop >= 2 then
-							--serverPrint(v.Name)
 							movementRemote:FireServer(v.Name, usercframe)
 							loop = 0
 						else
